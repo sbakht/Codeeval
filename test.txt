@@ -1,2 +1,4 @@
-how are you, abc
-hello world, def
+15.94;16.00
+17;16
+35;35
+45;50

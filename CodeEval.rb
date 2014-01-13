@@ -811,6 +811,10 @@ def removeCharacters(line)
   ans
 end
 
+def cashRegister(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts removeCharacters(line)
+  puts cashRegister(line)
 end
