@@ -837,17 +837,12 @@ def cashRegister(line)
     dic.to_a.reverse.each do |key,value|
       if change >= value && change % value >= 0
         change -= value
-        ans << "#{key}"
+        ans << key
+        break #start from beginning because might need multiple of same value type
       end
     end
-
   end
-
-
   return ans.join(',')
-
-
-
 end
 
 File.open(ARGV[0]).each_line do |line|
