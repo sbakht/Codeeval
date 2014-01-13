@@ -876,11 +876,22 @@ def jollyJumpers(line)
   line = line.strip.split
   length = line.length
 
+  jollyValues = []
+  max = line[0]
   line.length.times do |i|
-    if (line[i].to_i - line[i+1].to_i).abs >= length 
-      return "Not jolly" 
-    end
+    break if i >= length - 1
+    difference = (line[i].to_i - line[i+1].to_i).abs
+    max = difference if line[i].to_i > max.to_i
+    #return "Not jolly" if difference >= length  
+    jollyValues << difference
+    #print jollyValues
+    #return "Not jolly" if jollyValues.uniq.length != jollyValues.length
   end
+
+  jollyValues.each do |value|
+    return "Not jolly" if value > max.to_i
+  end
+
   return "Jolly"
 end
 
