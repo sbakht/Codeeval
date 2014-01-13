@@ -873,8 +873,15 @@ def sudoku(line)
 end
 
 def jollyJumpers(line)
-  line = line.strip
-  puts line.length
+  line = line.strip.split
+  length = line.length
+
+  line.length.times do |i|
+    if (line[i].to_i - line[i+1].to_i).abs >= length 
+      return "Not jolly" 
+    end
+  end
+  return "Jolly"
 end
 
 File.open(ARGV[0]).each_line do |line|
