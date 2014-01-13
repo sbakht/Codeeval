@@ -813,8 +813,13 @@ end
 
 def balancedSmileys(line)
   line = line.strip
-  validParentheses(line)
-
+  while line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':(')
+    line[line.index('(:')] = "" if line.index('(:')
+    line[line.index('):')] = "" if line.index('):')
+    line[line.index(':)')] = "" if line.index(':)')
+    line[line.index(':(')] = "" if line.index(':(')
+  end
+  line
 end
 
 File.open(ARGV[0]).each_line do |line|
