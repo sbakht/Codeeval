@@ -858,7 +858,18 @@ def sudoku(line)
       i += 1
     end
   end
-  
+
+  boardType.times do |row|
+    rowCheck = []
+    colCheck = []
+    boardType.times do |col|
+      rowCheck << board[row][col]
+      colCheck << board[col][row]
+    end
+    return "False" if rowCheck.uniq.length != rowCheck.length #checks for duplicates in a row
+    return "False" if colCheck.uniq.length != colCheck.length #checks for duplicates in a row
+  end
+  return "True"
 end
 
 File.open(ARGV[0]).each_line do |line|
