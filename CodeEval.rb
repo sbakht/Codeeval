@@ -874,7 +874,7 @@ end
 
 def jollyJumpers(line)
   line = line.strip
-  
+  puts line.length
 end
 
 File.open(ARGV[0]).each_line do |line|
