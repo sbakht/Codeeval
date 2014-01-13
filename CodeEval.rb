@@ -811,6 +811,10 @@ def removeCharacters(line)
   ans
 end
 
+def balancedSmileys(line)
+
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts removeCharacters(line)
+  puts balancedSmileys(line)
 end
