@@ -845,6 +845,11 @@ def cashRegister(line)
   return ans.join(',')
 end
 
+def sudoku(line)
+  boardType, nums = line.strip.split(';')
+  
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts cashRegister(line)
+  puts sudoku(line)
 end
