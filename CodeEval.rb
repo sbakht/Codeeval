@@ -817,30 +817,36 @@ def cashRegister(line)
   return "ERROR" if change < 0
   return "ZERO" if change == 0
 
-  if change >= 5 && change % 5 >= 0
-    return ">= THEN 5 DOLLAR CHANGE"
+  while change > 0
+    change = change.round(2)
+    if change >= 5 && change % 5 >= 0
+      change -= 5
+      puts ">= THEN 5 DOLLAR CHANGE"
+    end
+
+    if change >= 1 && change % 1 >= 0
+      puts ">= THEN 1 DOLLAR CHANGE"
+    end
+
+    if change >= 0.1 && change % 0.1 >= 0
+      puts ">= THEN 1 DIME CHANGE"
+    end
+
+
+    if change >= 0.05 && change % 0.05 >= 0
+      change -= 0.05
+      puts ">= THEN 1 NICKLE CHANGE"
+    end
+
+
+    if change >= 0.01 && change % 0.01 >= 0
+      change -= 0.01
+      puts ">= THEN 1 PENNY CHANGE"
+    end
   end
 
-  if change >= 1 && change % 1 >= 0
-    return ">= THEN 1 DOLLAR CHANGE"
-  end
 
-  if change >= 0.1 && change % 0.1 >= 0
-    return ">= THEN 1 DIME CHANGE"
-  end
-
-
-  if change >= 0.05 && change % 0.05 >= 0
-    return ">= THEN 1 NICKLE CHANGE"
-  end
-
-
-  if change >= 0.01 && change % 0.01 >= 0
-    return ">= THEN 1 PENNY CHANGE"
-  end
-
-
-  return "NEEDS CHANGE" if change > 0
+  return "OTHER CHANGE" if change > 0
 
 
 
