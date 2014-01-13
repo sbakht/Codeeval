@@ -813,8 +813,13 @@ end
 
 def cashRegister(line)
   cost, payment = line.strip.split(';')
-  return "ERROR" if cost.to_f > payment.to_f
-  return "ZERO" if cost.to_f == payment.to_f
+  change = payment.to_f - cost.to_f
+  return "ERROR" if change < 0
+  return "ZERO" if change == 0
+  return "NEEDS CHANGE" if change > 0
+
+
+
 end
 
 File.open(ARGV[0]).each_line do |line|
