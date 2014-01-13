@@ -812,6 +812,8 @@ def removeCharacters(line)
 end
 
 def balancedSmileys(line)
+  line = line.strip
+  validParentheses(line)
 
 end
 
