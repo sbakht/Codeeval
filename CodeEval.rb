@@ -799,6 +799,14 @@ def numberOfOnes(line)
   numOnes
 end
 
+def removeCharacters(line)
+  str, removeTheseChars = line.strip.split(', ')
+  removeTheseChars = removeTheseChars.split
+  str.length.times do |i|
+    puts str[i] if removeTheseChars.index(line[i])
+  end
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts numberOfOnes(line)
+  puts removeCharacters(line)
 end
