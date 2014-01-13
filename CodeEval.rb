@@ -847,6 +847,17 @@ end
 
 def sudoku(line)
   boardType, nums = line.strip.split(';')
+  boardType = boardType.to_i
+  nums = nums.split(',')
+  board = Array.new(boardType){Array.new(boardType,0)}
+
+  i = 0
+  boardType.times do |row|
+    boardType.times do |col|
+      board[row][col] = nums[i]
+      i += 1
+    end
+  end
   
 end
 
