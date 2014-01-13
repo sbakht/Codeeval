@@ -788,6 +788,17 @@ def emailValidation(line)
   return "false"
 end
 
+def numberOfOnes(line)
+  line = line.strip
+  bits = line.to_i.to_s(2)
+  numOnes = 0
+
+  bits.length.times do |i|
+    numOnes += 1 if bits[i] == '1'
+  end
+  numOnes
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts emailValidation(line)
+  puts numberOfOnes(line)
 end
