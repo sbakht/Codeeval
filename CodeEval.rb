@@ -817,31 +817,28 @@ def cashRegister(line)
   return "ERROR" if change < 0
   return "ZERO" if change == 0
 
+  dic = {'PENNY'=> 0.01,
+        'NICKEL'=> 0.05,
+        'DIME'=> 0.10,
+        'QUARTER'=> 0.25,
+        'HALF DOLLAR'=> 0.50,
+        'ONE'=> 1.00,
+        'TWO'=> 2.00,
+        'FIVE'=> 5.00,
+        'TEN'=> 10.00,
+        'TWENTY'=> 20.00,
+        'FIFTY'=> 50.00,
+        'ONE HUNDRED'=> 100.00}
+
+
   while change > 0
     change = change.round(2)
-    if change >= 5 && change % 5 >= 0
-      change -= 5
-      puts ">= THEN 5 DOLLAR CHANGE"
-    end
 
-    if change >= 1 && change % 1 >= 0
-      puts ">= THEN 1 DOLLAR CHANGE"
-    end
-
-    if change >= 0.1 && change % 0.1 >= 0
-      puts ">= THEN 1 DIME CHANGE"
-    end
-
-
-    if change >= 0.05 && change % 0.05 >= 0
-      change -= 0.05
-      puts ">= THEN 1 NICKLE CHANGE"
-    end
-
-
-    if change >= 0.01 && change % 0.01 >= 0
-      change -= 0.01
-      puts ">= THEN 1 PENNY CHANGE"
+    dic.to_a.reverse.each do |key,value|
+      if change >= value && change % value >= 0
+        change -= value
+        puts ">= THEN #{key} CHANGE"
+      end
     end
   end
 
