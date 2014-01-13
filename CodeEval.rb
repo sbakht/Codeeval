@@ -801,10 +801,14 @@ end
 
 def removeCharacters(line)
   str, removeTheseChars = line.strip.split(', ')
-  removeTheseChars = removeTheseChars.split
+  removeTheseChars = removeTheseChars.split('')
+  ans = ""
   str.length.times do |i|
-    puts str[i] if removeTheseChars.index(line[i])
+    if !removeTheseChars.index(line[i])
+      ans << line[i]
+    end
   end
+  ans
 end
 
 File.open(ARGV[0]).each_line do |line|
