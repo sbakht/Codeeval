@@ -830,20 +830,21 @@ def cashRegister(line)
         'FIFTY'=> 50.00,
         'ONE HUNDRED'=> 100.00}
 
-
+  ans = []
   while change > 0
-    change = change.round(2)
+    change = change.round(2) #Fixes float decimal problem
 
     dic.to_a.reverse.each do |key,value|
       if change >= value && change % value >= 0
         change -= value
-        puts ">= THEN #{key} CHANGE"
+        ans << "#{key}"
       end
     end
+
   end
 
 
-  return "OTHER CHANGE" if change > 0
+  return ans.join(',')
 
 
 
