@@ -813,13 +813,15 @@ end
 
 def balancedSmileys(line)
   line = line.strip
-  while line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':(')
-    line[line.index('(:')] = "" if line.index('(:')
-    line[line.index('):')] = "" if line.index('):')
-    line[line.index(':)')] = "" if line.index(':)')
-    line[line.index(':(')] = "" if line.index(':(')
+
+  if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
+    return false if line.count('(') != line.count('(')
+    openParen = []
+    closedparen = []
+    return "Even Paren"
   end
-  line
+  return 'Has Smiley'
+ #line
 end
 
 File.open(ARGV[0]).each_line do |line|
