@@ -843,20 +843,24 @@ def balancedSmileys(line)
     return "YES" if openParen == closedParen && !brokenParen
   end
 
-  smileyOrder = [':(',':)','):','(:']
-
-  i = 0
+  x = 0
   originalLine = line
-  while true
-    return "YES" if breakSmileyBalanced?(line) == "YES"
+  smileyOrder = [':(',':)','):','(:'].permutation.map(&:join).to_a
+  while x < smileyOrder.length
+    #smileyOrder = [':(',':)','):','(:'].shuffle
 
-    i += 1 if line.sub(smileyOrder[i],'') == line
-    return 'Needs Smiley Check' if i == 4
-    line = line.sub(smileyOrder[i],'')
+    i = 0
+    smileyOrder[x] = smileyOrder[x].scan(/../)
+    while i < 4
+      line = line.sub(smileyOrder[x][i],'')
+      return "YES" if breakSmileyBalanced?(line) == "YES"
+      i += 1 if line.sub(smileyOrder[x][i],'') == line
+    end
+    line = originalLine
+    x += 1
   end
 
-  return 'Needs Smiley Check'
- #line
+  return 'NO'
 end
 
 numYES = 0
