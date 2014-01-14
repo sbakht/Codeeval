@@ -847,7 +847,6 @@ def balancedSmileys(line)
   originalLine = line
   smileyOrder = [':(',':)','):','(:'].permutation.map(&:join).to_a
   while x < smileyOrder.length
-    #smileyOrder = [':(',':)','):','(:'].shuffle
 
     i = 0
     smileyOrder[x] = smileyOrder[x].scan(/../)
@@ -863,15 +862,6 @@ def balancedSmileys(line)
   return 'NO'
 end
 
-numYES = 0
-numNO = 0
-numNeed = 0
 File.open(ARGV[0]).each_line do |line|
   puts balancedSmileys(line)
-  numYES += 1 if balancedSmileys(line) == "YES"
-  numNO += 1 if balancedSmileys(line) == "NO"
-  numNeed += 1 if balancedSmileys(line) == "Needs Smiley Check"
 end
-puts "Num YES: " + numYES.to_s
-puts "Num NO: " + numNO.to_s
-puts "Num Need Check: " + numNeed.to_s
