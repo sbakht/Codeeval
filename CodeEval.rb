@@ -814,32 +814,40 @@ end
 def balancedSmileys(line)
   line = line.strip
 
-  if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
-    return "False" if line.count('(') != line.count(')')
+  def withoutSmileyBalanced?(line)
+    if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
+      return "False" if line.count('(') != line.count(')')
+      openParen = 0
+      closedParen = 0
+      line.length.times do |i|
+        openParen += 1 if line[i] == "("
+        closedParen += 1 if line[i] == ")"
+        return "False" if closedParen > openParen
+      end
+    end
+  end
+
+  def breakSmileyBalanced?(line)
+    arr = line.split('')
     openParen = 0
     closedParen = 0
-    line.length.times do |i|
-      openParen += 1 if line[i] == "("
-      closedParen += 1 if line[i] == ")"
-      return "False" if closedParen > openParen
+    brokenParen = false
+    arr.each_with_index do |char, i|
+      openParen += 1 if char == "("
+      closedParen += 1 if char == ")"
+      if closedParen > openParen
+        brokenParen = true 
+        break
+      end
     end
+    return "True" if openParen == closedParen && !brokenParen
   end
 
-  arr = line.split('')
-  openParen = 0
-  closedParen = 0
-  brokenParen = false
-  arr.each do |char|
-    openParen += 1 if char == "("
-    closedParen += 1 if char == ")"
-    if closedParen > openParen
-      brokenParen = true 
-      break
-    end
-  end
-  return "True" if openParen == closedParen && !brokenParen
+  return "False" if withoutSmileyBalanced?(line) == "False" 
+  return "True" if breakSmileyBalanced?(line) == "True"
 
-
+  
+  
   return 'Needs Smiley Check'
  #line
 end
