@@ -931,6 +931,23 @@ def selfDescribingNumbers(line)
   return 1
 end
 
+def setIntersection(line)
+  set1, set2 = line.strip.split(';')
+  set1 = set1.split(',')
+  set2 = set2.split(',')
+  ans = []
+  if set1.length < set2.length
+    set1.each do |item|
+      ans << item if set2.index(item) 
+    end
+  else
+    set2.each do |item|
+      ans << item if set1.index(item) 
+    end
+  end
+  return ans.join(',')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts selfDescribingNumbers(line)
+  puts setIntersection(line)
 end
