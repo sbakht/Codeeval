@@ -872,6 +872,57 @@ def sudoku(line)
   return "True"
 end
 
+def balancedSmileys(line)
+  line = line.strip
+
+  def withoutSmileyBalanced?(line)
+    if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
+      return "NO" if line.count('(') != line.count(')')
+      openParen = 0
+      closedParen = 0
+      line.length.times do |i|
+        openParen += 1 if line[i] == "("
+        closedParen += 1 if line[i] == ")"
+        return "NO" if closedParen > openParen
+      end
+    end
+  end
+
+  def breakSmileyBalanced?(line)
+    arr = line.split('')
+    openParen = 0
+    closedParen = 0
+    brokenParen = false
+    arr.each_with_index do |char, i|
+      openParen += 1 if char == "("
+      closedParen += 1 if char == ")"
+      if closedParen > openParen
+        brokenParen = true 
+        break
+      end
+    end
+    return "YES" if openParen == closedParen && !brokenParen
+  end
+
+  x = 0
+  originalLine = line
+  smileyOrder = [':(',':)','):','(:'].permutation.map(&:join).to_a
+  while x < smileyOrder.length
+
+    i = 0
+    smileyOrder[x] = smileyOrder[x].scan(/../)
+    while i < 4
+      line = line.sub(smileyOrder[x][i],'')
+      return "YES" if breakSmileyBalanced?(line) == "YES"
+      i += 1 if line.sub(smileyOrder[x][i],'') == line
+    end
+    line = originalLine
+    x += 1
+  end
+
+  return 'NO'
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts sudoku(line)
+  puts balancedSmileys(line)
 end
