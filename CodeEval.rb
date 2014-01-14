@@ -816,13 +816,13 @@ def balancedSmileys(line)
 
   def withoutSmileyBalanced?(line)
     if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
-      return "False" if line.count('(') != line.count(')')
+      return "NO" if line.count('(') != line.count(')')
       openParen = 0
       closedParen = 0
       line.length.times do |i|
         openParen += 1 if line[i] == "("
         closedParen += 1 if line[i] == ")"
-        return "False" if closedParen > openParen
+        return "NO" if closedParen > openParen
       end
     end
   end
@@ -840,18 +840,54 @@ def balancedSmileys(line)
         break
       end
     end
-    return "True" if openParen == closedParen && !brokenParen
+    return "YES" if openParen == closedParen && !brokenParen
   end
 
-  return "False" if withoutSmileyBalanced?(line) == "False" 
-  return "True" if breakSmileyBalanced?(line) == "True"
+  while true
+    return "NO" if withoutSmileyBalanced?(line) == "NO" 
+    return "YES" if breakSmileyBalanced?(line) == "YES"
+    
+    break if line.sub(':(','') == line
+    line = line.sub(':(','')
+  end
 
-  
-  
+  while true
+    return "NO" if withoutSmileyBalanced?(line) == "NO" 
+    return "YES" if breakSmileyBalanced?(line) == "YES"
+    
+    break if line.sub(':)','') == line
+    line = line.sub(':)','')
+  end
+
+  while true
+    return "NO" if withoutSmileyBalanced?(line) == "NO" 
+    return "YES" if breakSmileyBalanced?(line) == "YES"
+    
+    break if line.sub('):','') == line
+    line = line.sub('):','')
+  end
+
+  while true
+    return "NO" if withoutSmileyBalanced?(line) == "NO" 
+    return "YES" if breakSmileyBalanced?(line) == "YES"
+    
+    break if line.sub('(:','') == line
+    line = line.sub('(:','')
+  end
+
   return 'Needs Smiley Check'
  #line
 end
 
+numYES = 0
+numNO = 0
+numNeed = 0
 File.open(ARGV[0]).each_line do |line|
   puts balancedSmileys(line)
+  numYES += 1 if balancedSmileys(line) == "YES"
+  numNO += 1 if balancedSmileys(line) == "NO"
+  numNeed += 1 if balancedSmileys(line) == "Needs Smiley Check"
 end
+puts "Num YES: " + numYES.to_s
+puts "Num NO: " + numNO.to_s
+puts "Num Need Check: " + numNeed.to_s
