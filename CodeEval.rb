@@ -923,6 +923,14 @@ def balancedSmileys(line)
   return 'NO'
 end
 
+def selfDescribingNumbers(line)
+  line = line.strip.split('')
+  line.each_with_index do |num, i|
+    return 0 if num.to_i != line.count(i.to_s)
+  end
+  return 1
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts balancedSmileys(line)
+  puts selfDescribingNumbers(line)
 end
