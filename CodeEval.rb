@@ -843,36 +843,16 @@ def balancedSmileys(line)
     return "YES" if openParen == closedParen && !brokenParen
   end
 
-  while true
-    return "NO" if withoutSmileyBalanced?(line) == "NO" 
-    return "YES" if breakSmileyBalanced?(line) == "YES"
-    
-    break if line.sub(':(','') == line
-    line = line.sub(':(','')
-  end
+  smileyOrder = [':(',':)','):','(:']
 
+  i = 0
+  originalLine = line
   while true
-    return "NO" if withoutSmileyBalanced?(line) == "NO" 
     return "YES" if breakSmileyBalanced?(line) == "YES"
-    
-    break if line.sub(':)','') == line
-    line = line.sub(':)','')
-  end
 
-  while true
-    return "NO" if withoutSmileyBalanced?(line) == "NO" 
-    return "YES" if breakSmileyBalanced?(line) == "YES"
-    
-    break if line.sub('):','') == line
-    line = line.sub('):','')
-  end
-
-  while true
-    return "NO" if withoutSmileyBalanced?(line) == "NO" 
-    return "YES" if breakSmileyBalanced?(line) == "YES"
-    
-    break if line.sub('(:','') == line
-    line = line.sub('(:','')
+    i += 1 if line.sub(smileyOrder[i],'') == line
+    return 'Needs Smiley Check' if i == 4
+    line = line.sub(smileyOrder[i],'')
   end
 
   return 'Needs Smiley Check'
