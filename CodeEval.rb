@@ -815,13 +815,13 @@ def balancedSmileys(line)
   line = line.strip
 
   if !(line.index('(:') ||   line.index('):') ||   line.index(':)') ||   line.index(':('))
-    return false if line.count('(') != line.count('(')
+    return "False" if line.count('(') != line.count(')')
     openParen = 0
     closedParen = 0
     line.length.times do |i|
       openParen += 1 if line[i] == "("
       closedParen += 1 if line[i] == ")"
-      return "Broken Parenthesis" if closedParen > openParen
+      return "False" if closedParen > openParen
     end
   end
 
@@ -837,7 +837,8 @@ def balancedSmileys(line)
       break
     end
   end
-  return "No Smiley Balanced" if openParen == closedParen && !brokenParen
+  return "True" if openParen == closedParen && !brokenParen
+
 
   return 'Needs Smiley Check'
  #line
