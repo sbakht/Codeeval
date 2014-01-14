@@ -839,7 +839,7 @@ def balancedSmileys(line)
   end
   return "No Smiley Balanced" if openParen == closedParen && !brokenParen
 
-  return 'Has Smiley'
+  return 'Needs Smiley Check'
  #line
 end
 
