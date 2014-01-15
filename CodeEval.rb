@@ -972,6 +972,18 @@ def nModm(line)
   n - (n / m)*m
 end
 
+def lowestUniqueNumber(line)
+  line = line.strip.split
+  numCount = Array.new(10,0)
+  line.each do |num|
+    numCount[num.to_i] += 1
+  end
+  numCount.each_with_index do |num,i|
+    return line.index(i.to_s) + 1 if num == 1
+  end
+  return 0
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts nModm(line)
+  puts lowestUniqueNumber(line)
 end
