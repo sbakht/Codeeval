@@ -985,8 +985,20 @@ def lowestUniqueNumber(line)
 end
 
 def romanNumerals(line)
-  line = line.strip
-  
+  num = line.strip.to_i
+  ans = ""
+  dic = {1 => "I", 5 => "V", 10 => "X", 50 => "L", 100 => "C", 500 => "D", 1000 => "M"}
+
+  while num != 0
+    dic.to_a.reverse.each do |key,value|
+      if num >= key && num % key >= 0
+        ans << value
+        num -= key
+        break
+      end
+    end
+  end
+  ans
 end
 
 File.open(ARGV[0]).each_line do |line|
