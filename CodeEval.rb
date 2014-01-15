@@ -984,6 +984,11 @@ def lowestUniqueNumber(line)
   return 0
 end
 
+def romanNumerals(line)
+  line = line.strip
+  
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts lowestUniqueNumber(line)
+  puts romanNumerals(line)
 end
