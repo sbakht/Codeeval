@@ -948,6 +948,21 @@ def setIntersection(line)
   return ans.join(',')
 end
 
+def swapElements(line)
+  line, swaps = line.strip.split(' : ')
+  line = line.split
+  swaps = swaps.split(', ')
+
+  swaps.each do |swap|
+    line[swap[0].to_i], line[swap[2].to_i] = line[swap[2].to_i].to_s, line[swap[0].to_i].to_s
+  end
+  return line.join(' ')
+end
+
+def calculateDistance(line)
+
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts setIntersection(line)
+  puts calculateDistance(line)
 end
