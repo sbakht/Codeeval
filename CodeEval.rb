@@ -960,7 +960,9 @@ def swapElements(line)
 end
 
 def calculateDistance(line)
-
+  line = line.strip
+  nums = line.scan(/[-]*\d+/)
+  Math.sqrt((nums[0].to_i- nums[2].to_i)**2 + (nums[1].to_i - nums[3].to_i)**2).to_i
 end
 
 File.open(ARGV[0]).each_line do |line|
