@@ -1001,6 +1001,17 @@ def romanNumerals(line)
   ans
 end
 
+def uniqueElements(line) #they are sorted so no need to make hash
+  line = line.strip.split(',')
+  ans = []
+  prev = nil
+  line.each do |num|
+    ans << num if num != prev
+    prev = num
+  end
+  ans.join(',')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts romanNumerals(line)
+  puts uniqueElements(line)
 end
