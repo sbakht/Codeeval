@@ -965,6 +965,13 @@ def calculateDistance(line)
   Math.sqrt((nums[0].to_i- nums[2].to_i)**2 + (nums[1].to_i - nums[3].to_i)**2).to_i
 end
 
+def nModm(line)
+  line = line.strip.split(',')
+  n = line[0].to_i
+  m = line[1].to_i
+  n - (n / m)*m
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts calculateDistance(line)
+  puts nModm(line)
 end
