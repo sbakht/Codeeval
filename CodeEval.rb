@@ -1039,13 +1039,14 @@ def chainInspection(line)
   firstNum = startChain[0][-1]
 
   currentNum = firstNum
-  i = 0
+  i = 1
   while currentNum != "END"
     currentChain = chains.select { |chain| chain.match(/#{currentNum}-/) }
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
     i += 1
     return "BAD" if i > 500
   end
+  return "BAD" if i < chains.length
   return "GOOD"
 end
 
