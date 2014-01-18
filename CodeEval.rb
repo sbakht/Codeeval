@@ -1039,8 +1039,7 @@ def chainInspection(line)
   completed = []
   currentNum = "BEGIN"
   while currentNum != "END"
-    currentChain = chains.grep(/#{currentNum}-/)
-    # puts i
+    currentChain = chains.grep(/^#{currentNum}-/) #Checks from start or might use longer num with same consecutive digits as currentNum
     return "BAD" if completed.index(currentChain)
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
     completed << currentChain
