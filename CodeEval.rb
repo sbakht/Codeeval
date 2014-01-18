@@ -1033,7 +1033,10 @@ def fileSize(line)
 end
 
 def chainInspection(line)
-  line = line.strip
+  chains = line.strip.split(';')
+  print chains
+  startChain = chains.select { |chain| chain.match(/BEGIN/) }
+  firstNum = startChain[0][-1]
 end
 
 File.open(ARGV[0]).each_line do |line|
