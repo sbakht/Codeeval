@@ -1012,6 +1012,10 @@ def uniqueElements(line) #they are sorted so no need to make hash
   ans.join(',')
 end
 
+def hexToDecimal(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts uniqueElements(line)
+  puts hexToDecimal(line)
 end
