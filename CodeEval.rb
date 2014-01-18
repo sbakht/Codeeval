@@ -1035,16 +1035,16 @@ end
 def chainInspection(line)
   chains = line.strip.split(';')
   print chains
-  startChain = chains.select { |chain| chain.match(/BEGIN/) }
-  firstNum = startChain[0][-1]
 
-  currentNum = firstNum
-  i = 1
+  i = 0
+  completed = []
+  currentNum = "BEGIN"
   while currentNum != "END"
     currentChain = chains.select { |chain| chain.match(/#{currentNum}-/) }
+    return "BAD" if completed.index(currentChain)
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
+    completed << currentChain
     i += 1
-    return "BAD" if i > chains.length
   end
   return "BAD" if i < chains.length
   return "GOOD"
