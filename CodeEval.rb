@@ -1034,13 +1034,14 @@ end
 
 def chainInspection(line)
   chains = line.strip.split(';')
-  print chains
+  #print chains
 
   i = 0
   completed = []
   currentNum = "BEGIN"
   while currentNum != "END"
-    currentChain = chains.select { |chain| chain.match(/#{currentNum}-/) }
+    currentChain = chains.grep(/#{currentNum}-/)
+    # puts i
     return "BAD" if completed.index(currentChain)
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
     completed << currentChain
