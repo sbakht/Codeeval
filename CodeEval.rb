@@ -1013,7 +1013,17 @@ def uniqueElements(line) #they are sorted so no need to make hash
 end
 
 def hexToDecimal(line)
-  line = line.strip
+  line = line.strip.split('')
+  deci = 0
+  dic = {"a" => 10, "b" => 11, "c" => 12, "d" => 13, "e" => 14, "f" => 15}
+  line.reverse.each_with_index do |hexChar, i|
+    if dic[hexChar]
+      deci += dic[hexChar] * (16**i)
+    else
+      deci += hexChar.to_i * (16**i)
+    end
+  end
+  deci
 end
 
 File.open(ARGV[0]).each_line do |line|
