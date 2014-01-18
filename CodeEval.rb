@@ -1037,6 +1037,13 @@ def chainInspection(line)
   print chains
   startChain = chains.select { |chain| chain.match(/BEGIN/) }
   firstNum = startChain[0][-1]
+
+  currentNum = firstNum
+  while currentNum != "END"
+    currentChain = chains.select { |chain| chain.match(/#{currentNum}-/) }
+    currentNum = currentChain[0].scan(/-(.+)/)[0][0] 
+  end
+  return "GOOD"
 end
 
 File.open(ARGV[0]).each_line do |line|
