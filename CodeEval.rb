@@ -1036,7 +1036,6 @@ def chainInspection(line)
   chains = line.strip.split(';')
   #print chains
 
-  i = 0
   completed = []
   currentNum = "BEGIN"
   while currentNum != "END"
@@ -1045,9 +1044,8 @@ def chainInspection(line)
     return "BAD" if completed.index(currentChain)
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
     completed << currentChain
-    i += 1
   end
-  return "BAD" if i < chains.length
+  return "BAD" if completed.length < chains.length
   return "GOOD"
 end
 
