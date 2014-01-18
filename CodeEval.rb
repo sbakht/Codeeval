@@ -1048,7 +1048,9 @@ def chainInspection(line)
 end
 
 def findASquare(line)
-  coordinate = line.strip
+  coordinate = line.strip.scan(/\d+/)
+  coordinate = coordinate.each_slice(2).map { |n1, n2| [n1,n2] }
+  print coordinate
 end
 
 File.open(ARGV[0]).each_line do |line|
