@@ -1032,6 +1032,10 @@ def fileSize(line)
   File.size(ARGV[0])
 end
 
+def chainInspection(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts bitPositions(line)
+  puts chainInspection(line)
 end
