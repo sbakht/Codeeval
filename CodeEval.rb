@@ -1026,6 +1026,10 @@ def hexToDecimal(line)
   deci
 end
 
+def fileSize(line)
+  File.size(ARGV[0])
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts hexToDecimal(line)
+  #fileSize(line)
 end
