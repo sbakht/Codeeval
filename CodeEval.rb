@@ -23,9 +23,10 @@ require 'benchmark'
 # end
 
 def bitPositions(line)
-    n1 = line.split(',')[0].to_i.to_s(2)
-    n2 = line.split(',')[1].to_i.to_s(2)
-    position = line.split(',')[2].to_i
+    line = line.strip.split(',')
+    n1 = line[0].to_i.to_s(2)
+    n2 = line[1].to_i.to_s(2)
+    position = line[2].to_i
 
     if n1.length > n2.length
         (n1.length-n2.length).times do
@@ -36,11 +37,12 @@ def bitPositions(line)
             n1 = "0" + n1
         end
     end
-
+    
+    puts "#{n1} : #{n2} : #{position}"
     if n1[position] == n2[position]
-        puts "true"
+        return "true"
     else
-        puts "false"
+        return "false"
     end  
 end
 
@@ -1031,5 +1033,5 @@ def fileSize(line)
 end
 
 File.open(ARGV[0]).each_line do |line|
-  #fileSize(line)
+  puts bitPositions(line)
 end
