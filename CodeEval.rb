@@ -1034,7 +1034,6 @@ end
 
 def chainInspection(line)
   chains = line.strip.split(';')
-  #print chains
 
   completed = []
   currentNum = "BEGIN"
@@ -1048,6 +1047,10 @@ def chainInspection(line)
   return "GOOD"
 end
 
+def findASquare(line)
+  coordinate = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts chainInspection(line)
+  puts findASquare(line)
 end
