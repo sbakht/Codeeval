@@ -1044,7 +1044,7 @@ def chainInspection(line)
     currentChain = chains.select { |chain| chain.match(/#{currentNum}-/) }
     currentNum = currentChain[0].scan(/-(.+)/)[0][0]
     i += 1
-    return "BAD" if i > 500
+    return "BAD" if i > chains.length
   end
   return "BAD" if i < chains.length
   return "GOOD"
