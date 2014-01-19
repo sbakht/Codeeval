@@ -1074,9 +1074,12 @@ end
 
 def panagrams(line)
   line = line.strip.downcase
-  (99..122).each do |charDeci| #converts the a-z decimal to char and searches the input
-    return "MISSING CHARS" if !line.index(charDeci.chr)
+  missingChars = ""
+  (97..122).each do |charDeci| #converts the a-z decimal to char and searches the input
+    char = charDeci.chr
+    missingChars << char if !line.index(char)
   end
+  return missingChars if missingChars.length > 0
   return "NULL"
 end
 
