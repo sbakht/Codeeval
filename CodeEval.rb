@@ -1103,7 +1103,9 @@ def numberPairs(line)
   nums = nums.split(',')
   nums.each do |num1|
     nums.each do |num2|
-      puts "#{num1} : #{num2}" if num1.to_i + num2.to_i == desiredSum.to_i
+      num1 = num1.to_i
+      num2 = num2.to_i
+      puts "#{num1} : #{num2}" if num1 + num2 == desiredSum.to_i && num1 < num2
     end
   end
   ""
