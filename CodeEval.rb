@@ -1098,6 +1098,11 @@ def decimalToBinary(line)
   ans
 end
 
+def numberPairs(line)
+  nums, desiredSum = line.strip.split(';')
+  nums = nums.split(',') 
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts decimalToBinary(line)
+  puts numberPairs(line)
 end
