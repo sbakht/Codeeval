@@ -1100,7 +1100,13 @@ end
 
 def numberPairs(line)
   nums, desiredSum = line.strip.split(';')
-  nums = nums.split(',') 
+  nums = nums.split(',')
+  nums.each do |num1|
+    nums.each do |num2|
+      puts "#{num1} : #{num2}" if num1.to_i + num2.to_i == desiredSum.to_i
+    end
+  end
+  ""
 end
 
 File.open(ARGV[0]).each_line do |line|
