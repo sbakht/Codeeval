@@ -1048,14 +1048,27 @@ def chainInspection(line)
 end
 
 def findASquare(line)
+
+  def calculateDistance(point1,point2)
+    Math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2).round
+  end
+
   points = line.strip.scan(/\d+/)
-  points = points.each_slice(2).map { |n1, n2| [n1,n2,n1+n2] } #can sort by sums to get right positions
-  points = points.sort
-  puts line
-  return "false" if points[0][0] != points[1][0] && points[2][0] != points[3][0] && points[0][1] != points[2][1] && points[1][1] != points[3][1]
-  differencey = points[1][1].to_i - points[0][1].to_i
-  differencex = points[2][0].to_i - points[0][0].to_i
-  return "false" if differencex != differencey
+  points = points.each_slice(2).map { |n1, n2| [n1.to_i,n2.to_i] }
+
+  i = 0
+  sumDistances = []
+  points.each do |point1|
+    sumDistances[i] = []
+    points.each do |point2|
+      sumDistances[i] << calculateDistance(point1,point2)
+    end
+    sumDistances[i].sort!
+    i += 1
+  end
+
+  return "false" if sumDistances[0] != sumDistances[1] || sumDistances[0] != sumDistances[2] || sumDistances[0] != sumDistances[3] 
+  return "false" if sumDistances[0].count(0) > 1
   return "true"
 end
 
