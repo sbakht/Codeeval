@@ -1084,7 +1084,19 @@ def panagrams(line)
 end
 
 def decimalToBinary(line)
-  line = line.strip
+  line = line.strip.to_i
+  ans = ""
+  firstOne = false
+  100.downto(0).each do |i|
+    if 2**i <= line
+      ans << "1"
+      line -= 2**i
+      firstOne = true
+    elsif firstOne
+      ans << "0"
+    end
+  end
+  ans
 end
 
 File.open(ARGV[0]).each_line do |line|
