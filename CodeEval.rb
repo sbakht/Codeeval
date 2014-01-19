@@ -1116,7 +1116,10 @@ end
 
 def pointInCircle(line)
   line = line.strip
-  puts line
+  nums = line.scan(/[-]*\d+\.*\d*/)
+  center = nums[0..1]
+  radius = nums[2]
+  point = nums[3..4]
 end
 
 File.open(ARGV[0]).each_line do |line|
