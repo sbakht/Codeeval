@@ -1072,6 +1072,14 @@ def findASquare(line)
   return "true"
 end
 
+def panagrams(line)
+  line = line.strip.downcase
+  (99..122).each do |charDeci| #converts the a-z decimal to char and searches the input
+    return "MISSING CHARS" if !line.index(charDeci.chr)
+  end
+  return "NULL"
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts findASquare(line)
+  puts panagrams(line)
 end
