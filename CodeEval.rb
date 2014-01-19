@@ -1083,6 +1083,10 @@ def panagrams(line)
   return "NULL"
 end
 
+def decimalToBinary(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts panagrams(line)
+  puts decimalToBinary(line)
 end
