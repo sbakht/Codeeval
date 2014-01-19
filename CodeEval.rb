@@ -1114,6 +1114,11 @@ def numberPairs(line)
   return ans.join(';')
 end
 
+def pointInCircle(line)
+  line = line.strip
+  puts line
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts numberPairs(line)
+  puts pointInCircle(line)
 end
