@@ -1086,13 +1086,12 @@ end
 def decimalToBinary(line)
   line = line.strip.to_i
   ans = ""
-  firstOne = false
+  return "0" if line == 0
   100.downto(0).each do |i|
     if 2**i <= line
       ans << "1"
       line -= 2**i
-      firstOne = true
-    elsif firstOne
+    elsif ans.length > 0
       ans << "0"
     end
   end
