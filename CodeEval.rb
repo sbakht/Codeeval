@@ -1120,6 +1120,10 @@ def pointInCircle(line)
   center = nums[0..1]
   radius = nums[2]
   point = nums[3..4]
+
+  distance = Math.sqrt((center[0].to_f - point[0].to_f)**2 + (center[1].to_f - point[1].to_f)**2).round(2)
+  return "true" if distance <= radius.to_f
+  return "false"
 end
 
 File.open(ARGV[0]).each_line do |line|
