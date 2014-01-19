@@ -1048,9 +1048,15 @@ def chainInspection(line)
 end
 
 def findASquare(line)
-  coordinate = line.strip.scan(/\d+/)
-  coordinate = coordinate.each_slice(2).map { |n1, n2| [n1,n2] }
-  print coordinate
+  points = line.strip.scan(/\d+/)
+  points = points.each_slice(2).map { |n1, n2| [n1,n2,n1+n2] } #can sort by sums to get right positions
+  points = points.sort
+  puts line
+  return "false" if points[0][0] != points[1][0] && points[2][0] != points[3][0] && points[0][1] != points[2][1] && points[1][1] != points[3][1]
+  differencey = points[1][1].to_i - points[0][1].to_i
+  differencex = points[2][0].to_i - points[0][0].to_i
+  return "false" if differencex != differencey
+  return "true"
 end
 
 File.open(ARGV[0]).each_line do |line|
