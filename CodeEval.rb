@@ -1127,7 +1127,12 @@ def pointInCircle(line)
 end
 
 def decodeNumbers(line)
-  line = line.strip
+  line = line.strip.split('')
+  count = 0
+  line.each do |num|
+    count += 1 if num.to_i <= 26
+  end
+  count
 end
 
 File.open(ARGV[0]).each_line do |line|
