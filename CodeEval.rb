@@ -1128,9 +1128,20 @@ end
 
 def decodeNumbers(line)
   line = line.strip.split('')
+
+  def isValid?(arr)
+    arr.each do |num|
+      return false if num.to_i > 26 || num.to_i < 1
+    end
+    return true
+  end
+
   count = 0
-  line.each do |num|
-    count += 1 if num.to_i <= 26
+  line.length.times do |i|
+    temp = line.dup
+    temp[i..i+1] = line[i..i+1].each_slice(2).map { |a, b| b ? "#{a}#{b.to_i}" : "#{a}" }
+    puts temp.join(' ')
+    count += 1 if isValid?(temp)
   end
   count
 end
