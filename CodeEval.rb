@@ -1137,12 +1137,32 @@ def decodeNumbers(line)
   end
 
   count = 0
+  found = []
+
+
   line.length.times do |i|
     temp = line.dup
     temp[i..i+1] = line[i..i+1].each_slice(2).map { |a, b| b ? "#{a}#{b.to_i}" : "#{a}" }
     puts temp.join(' ')
-    count += 1 if isValid?(temp)
+    if isValid?(temp) #&& !found.index(temp.join(' '))
+      count += 1
+      found << temp
+    end
   end
+  #print found
+  found[0][1..-1] = found[1][1..-1]
+  puts ""
+
+  puts line.length
+  size = line.length / 2
+  combinations = []
+  (0..size).each do |i|
+    str = ""
+    (line.length - i*2).times { str << "0"}
+    (i).times { str << "1"}
+    combinations << str.split('').to_a.permutation.map(&:join).uniq
+  end
+  print combinations  
   count
 end
 
