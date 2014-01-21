@@ -1126,6 +1126,10 @@ def pointInCircle(line)
   return "false"
 end
 
+def decodeNumbers(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts pointInCircle(line)
+  puts decodeNumbers(line)
 end
