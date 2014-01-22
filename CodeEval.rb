@@ -1180,7 +1180,13 @@ def sumOfPrimes
 end
 
 def detectingCycles(line)
-  line = line.strip
+  line = line.strip.split
+  temp = ""
+  line.each do |num|
+    return num if num == temp
+    temp = num
+  end
+  return "false"
 end
 
 File.open(ARGV[0]).each_line do |line|
