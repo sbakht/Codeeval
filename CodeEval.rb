@@ -1168,6 +1168,27 @@ def reverseWords(line)
   ans.join(' ')
 end
 
+def sumOfPrimes
+  num = 3
+  sum = 2
+  numPrimes = 1
+  while numPrimes != 1000
+    isPrime = true
+    (2...num).each do |i|
+      if num % i == 0
+        isPrime = false
+        break
+      end
+    end
+    if isPrime
+      sum += num
+      numPrimes += 1
+    end
+    num += 1
+  end
+  sum
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts reverseWords(line)
+  puts sumOfPrimes
 end
