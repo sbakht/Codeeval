@@ -1159,6 +1159,15 @@ def decodeNumbers(line)
   count
 end
 
+def reverseWords(line)
+  line = line.strip.split
+  ans = []
+  line.reverse.each do |word|
+    ans << word
+  end
+  ans.join(' ')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts decodeNumbers(line)
+  puts reverseWords(line)
 end
