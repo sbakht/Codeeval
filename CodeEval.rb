@@ -23,27 +23,15 @@ require 'benchmark'
 # end
 
 def bitPositions(line)
-    line = line.strip.split(',')
-    n1 = line[0].to_i.to_s(2)
-    n2 = line[1].to_i.to_s(2)
-    position = line[2].to_i
+    n, p1, p2 = line.strip.split(',')
+    n = n.to_i.to_s(2)
 
-    if n1.length > n2.length
-        (n1.length-n2.length).times do
-            n2 = "0" + n2
-        end
-    elsif n2.length > n1.length
-        (n2.length-n1.length).times do
-            n1 = "0" + n1
-        end
+    while n.length % 4 != 0
+      n = "0" + n
     end
-    
-    puts "#{n1} : #{n2} : #{position}"
-    if n1[position] == n2[position]
-        return "true"
-    else
-        return "false"
-    end  
+
+    return true if n[p1.to_i ] == n[p2.to_i ]
+    return false
 end
 
 def multiplesOfANumber(line)
@@ -1192,5 +1180,5 @@ def sumOfPrimes
 end
 
 File.open(ARGV[0]).each_line do |line|
-  puts swapElements(line)
+  puts bitPositions(line)
 end
