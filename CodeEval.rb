@@ -1182,26 +1182,17 @@ end
 def detectingCycles(line)
   line = line.strip.split
   temp = ""
- 
-  temp = []
-  line.each_with_index do |num1,i|
-    temp = [line[i-1]]
-    return temp.join(' ') if [line[i]] == temp
+
+  cycleSize = 1
+  while cycleSize < line.length
+    temp = []
+    line.each_with_index do |num1, i|
+      temp = line[i-cycleSize..i-1]
+      return temp.join(' ') if line[i..i+cycleSize-1] == temp
+    end
+    cycleSize += 1
   end
 
-
-  temp = []
-  line.each_with_index do |num1,i|
-    temp = [line[i-2],line[i-1]]
-    return temp.join(' ') if [line[i],line[i+1]] == temp
-  end
-
-  temp = []
-  line.each_with_index do |num1,i|
-    temp = [line[i-3],line[i-2],line[i-1]]
-    return temp.join(' ') if [line[i],line[i+1],line[i+2]] == temp
-  end
-  
   return "false"
 end
 
