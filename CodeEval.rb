@@ -1208,13 +1208,22 @@ def overlappingRectangles(line)
       coords << [x,y]  
     end
   end
-  print coords
-  puts ""
-  break
   tleft = [r2Range[0][0],r2Range[1][1]]
   tright = [r2Range[0][1],r2Range[1][1]]
   bleft = [r2Range[0][0],r2Range[1][0]]
   bright = [r2Range[0][1],r2Range[1][0]]
+  return "True" if coords.index(tleft) || coords.index(tright) || coords.index(bleft) || coords.index(bright)
+
+  coords = []
+  (r2Range[0][0]..r2Range[0][1]).each do |x|
+    (r2Range[1][0]..r2Range[1][1]).each do |y|
+      coords << [x,y]  
+    end
+  end
+  tleft = [r1Range[0][0],r1Range[1][1]]
+  tright = [r1Range[0][1],r1Range[1][1]]
+  bleft = [r1Range[0][0],r1Range[1][0]]
+  bright = [r1Range[0][1],r1Range[1][0]]
   return "True" if coords.index(tleft) || coords.index(tright) || coords.index(bleft) || coords.index(bright)
   return "False"
 end
