@@ -951,12 +951,14 @@ def setIntersection(line)
 end
 
 def swapElements(line)
+  puts line
   line, swaps = line.strip.split(' : ')
   line = line.split
   swaps = swaps.split(', ')
-
   swaps.each do |swap|
-    line[swap[0].to_i], line[swap[2].to_i] = line[swap[2].to_i].to_s, line[swap[0].to_i].to_s
+    swap = swap.split('-')
+    line[swap[0].to_i], line[swap[1].to_i] = line[swap[1].to_i].to_s, line[swap[0].to_i].to_s
+    puts line.join(' ')
   end
   return line.join(' ')
 end
@@ -1190,5 +1192,5 @@ def sumOfPrimes
 end
 
 File.open(ARGV[0]).each_line do |line|
-  puts sumOfPrimes
+  puts swapElements(line)
 end
