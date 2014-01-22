@@ -1195,6 +1195,30 @@ def detectingCycles(line)
   return "false"
 end
 
+def overlappingRectangles(line)
+  line = line.strip.split(',')
+  r1 = line[0..3]
+  r2 = line[4..-1]
+  r1Range = [[r1[0].to_i,r1[2].to_i],[r1[3].to_i,r1[1].to_i]]
+  r2Range = [[r2[0].to_i,r2[2].to_i],[r2[3].to_i,r2[1].to_i]]
+
+  coords = []
+  (r1Range[0][0]..r1Range[0][1]).each do |x|
+    (r1Range[1][0]..r1Range[1][1]).each do |y|
+      coords << [x,y]  
+    end
+  end
+  print coords
+  puts ""
+  break
+  tleft = [r2Range[0][0],r2Range[1][1]]
+  tright = [r2Range[0][1],r2Range[1][1]]
+  bleft = [r2Range[0][0],r2Range[1][0]]
+  bright = [r2Range[0][1],r2Range[1][0]]
+  return "True" if coords.index(tleft) || coords.index(tright) || coords.index(bleft) || coords.index(bright)
+  return "False"
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts detectingCycles(line)
+  puts overlappingRectangles(line)
 end
