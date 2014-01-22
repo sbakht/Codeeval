@@ -1181,7 +1181,6 @@ end
 
 def detectingCycles(line)
   line = line.strip.split
-  temp = ""
 
   cycleSize = 1
   while cycleSize < line.length
