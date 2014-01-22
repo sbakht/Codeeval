@@ -1129,32 +1129,7 @@ end
 def decodeNumbers(line)
   line = line.strip.split('')
 
-  def isValid?(arr)
-    arr.each do |num|
-      return false if num.to_i > 26 || num.to_i < 1
-    end
-    return true
-  end
-
   count = 0
-  found = []
-
-
-  line.length.times do |i|
-    temp = line.dup
-    temp[i..i+1] = line[i..i+1].each_slice(2).map { |a, b| b ? "#{a}#{b.to_i}" : "#{a}" }
-    #puts temp.join(' ')
-    if isValid?(temp) #&& !found.index(temp.join(' '))
-      count += 1
-      found << temp
-    end
-  end
-  #print found
-  found[0][1..-1] = found[1][1..-1]
-  #puts ""
-
-  count = 0
-  #puts line.length
   size = line.length / 2
   combinations = []
   (0..size).each do |i|
@@ -1163,6 +1138,7 @@ def decodeNumbers(line)
     (i).times { str << "1"}
     combinations << str.split('').to_a.permutation.map(&:join).uniq
   end
+  
   combinations.each do |combination|
     combination.each do |zeroesAndOnes|
       i = 0
