@@ -1248,7 +1248,15 @@ end
 
 def stringRotation(line)
   str1, str2 = line.strip.split(',')
-  return "True" if str1.length == str2.length
+  return "False" if str1.length != str2.length
+  return "True" if str1 == str2
+  str1 = str1.split('')
+  str2 = str2.split('')
+  str2.length.times do |i|
+    temp = str2.pop
+    str2.unshift(temp)
+    return "True" if  str1 == str2
+  end
   return "False"
 end
 
