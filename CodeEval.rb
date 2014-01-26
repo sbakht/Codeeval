@@ -1230,6 +1230,20 @@ end
 
 def compressedSequence(line)
   line = line.strip.split
+  count = 0
+  ans = ""
+  last = line[0]
+  line.each do |num|
+    if last == num
+      count += 1
+    else
+      ans << "#{count} #{last} "
+      count = 1
+    last = num
+    end
+  end
+  ans << "#{count} #{last}"
+  ans
 end
 
 File.open(ARGV[0]).each_line do |line|
