@@ -1247,7 +1247,9 @@ def compressedSequence(line)
 end
 
 def stringRotation(line)
-  line = line.strip
+  str1, str2 = line.strip.split(',')
+  return "True" if str1.length == str2.length
+  return "False"
 end
 
 File.open(ARGV[0]).each_line do |line|
