@@ -1228,6 +1228,10 @@ def overlappingRectangles(line)
   return "False"
 end
 
+def compressedSequence(line)
+  line = line.strip.split
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts overlappingRectangles(line)
+  puts compressedSequence(line)
 end
