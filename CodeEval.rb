@@ -1260,6 +1260,28 @@ def stringRotation(line)
   return "False"
 end
 
+def sumToZero(line)
+  line = line.strip.split(',')
+  count = 0
+  combinations = line.permutation(4).to_a
+  uniqCombs = []
+  combinations.each do |item|
+    uniqCombs << item.sort
+  end
+  uniqCombs = uniqCombs.uniq
+
+  uniqCombs.each do |combination|
+    sum = 0
+    combination.each do |num|
+      sum += num.to_i
+    end
+    if sum == 0
+      count += 1 
+    end
+  end
+  count
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts stringRotation(line)
+  puts sumToZero(line)
 end
