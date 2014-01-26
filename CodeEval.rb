@@ -1239,13 +1239,17 @@ def compressedSequence(line)
     else
       ans << "#{count} #{last} "
       count = 1
-    last = num
+      last = num
     end
   end
   ans << "#{count} #{last}"
   ans
 end
 
+def stringRotation(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts compressedSequence(line)
+  puts stringRotation(line)
 end
