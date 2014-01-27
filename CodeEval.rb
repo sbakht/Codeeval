@@ -1261,7 +1261,13 @@ def stringRotation(line)
 end
 
 def textDollar(line)
-  line = line.strip
+  dic = {1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => "Five", 6 => "Six", 7 => "Seven", 8 => "Eight", 9 => "Nine", 10 => "Ten"}
+  num = line.strip.to_i
+  ans = ""
+  if num
+    ans += dic[num] if dic[num]
+  end
+  ans += "Dollars"
 end
 
 File.open(ARGV[0]).each_line do |line|
