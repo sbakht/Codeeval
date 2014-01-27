@@ -1266,9 +1266,13 @@ def textDollar(line)
   # doubles = {20 => "Twenty", 30 => 'Thirty', 40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty', 70 => "Seventy", 80 => "Eighty", 90 => "Ninety"}
   doubles = {1 => 'Ten', 2 => "Twenty", 3 => 'Thirty', 4 => 'Forty', 5 => 'Fifty', 6 => 'Sixty', 7 => "Seventy", 8 => "Eighty", 9 => "Ninety"}
 
-  numStr = line.strip.split('').map { |i| i.to_i }
   num = line.strip.to_i
   ans = ""
+
+  if num >= 100000 && num < 1000000
+    ans += "#{single[num.to_s[0].to_i]}Hundred"
+    num -= (num.to_s[0] + "00000").to_i
+  end
 
   if num >= 20000 && num < 100000
     ans += "#{doubles[num.to_s[0].to_i]}"
