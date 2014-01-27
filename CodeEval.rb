@@ -1340,6 +1340,41 @@ end
 
 def playWithDNA(line)
   input,max,str = line.strip.split
+
+  output = []
+
+  while str.length >= input.length
+    correct = 0
+    inputLoc = 0
+    errors = 0
+    temp = ""
+    str.length.times do |i|
+      if str[i] == input[inputLoc]
+        correct += 1
+        inputLoc += 1
+        temp << str[i]
+      elsif errors < max.to_i
+        correct += 1
+        inputLoc += 1
+        errors += 1
+        temp << str[i]
+      else
+        correct = 0
+        inputLoc = 0
+      end
+
+      if correct == input.length
+        output << [errors,temp]
+        correct = 0
+        inputLoc = 0
+        temp = ""
+        break
+      end
+    end
+    str = str[1..-1]
+  end
+  return output.sort.map { |errors,out| out}.join(' ') if output.length > 0
+  return "No match"
 end
 
 File.open(ARGV[0]).each_line do |line|
