@@ -1338,6 +1338,10 @@ def textDollar(line)
   ans += "Dollars"
 end
 
+def playWithDNA(line)
+  input,max,str = line.strip.split
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts textDollar(line)
+  puts playWithDNA(line)
 end
