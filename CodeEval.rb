@@ -1261,12 +1261,24 @@ def stringRotation(line)
 end
 
 def textDollar(line)
-  dic = {1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => "Five", 6 => "Six", 7 => "Seven", 8 => "Eight", 9 => "Nine", 10 => "Ten"}
+  single = {1 => 'One', 2 => 'Two', 3 => 'Three', 4 => 'Four', 5 => "Five", 6 => "Six", 7 => "Seven", 8 => "Eight", 9 => "Nine"}
+  tens = {10 => "Ten", 11 => 'Eleven', 12 => 'Twelve', 13 => 'Thirteen', 14 => 'Fourteen', 15 => "Fifteen", 16 => "Sixteen", 17 => "Seventeen", 18 => "Eighteen", 19 => "Nineteen"}
+  # doubles = {20 => "Twenty", 30 => 'Thirty', 40 => 'Forty', 50 => 'Fifty', 60 => 'Sixty', 70 => "Seventy", 80 => "Eighty", 90 => "Ninety"}
+  doubles = {2 => "Twenty", 3 => 'Thirty', 4 => 'Forty', 5 => 'Fifty', 6 => 'Sixty', 7 => "Seventy", 8 => "Eighty", 9 => "Ninety"}
+
+  numStr = line.strip.split('').map { |i| i.to_i }
   num = line.strip.to_i
   ans = ""
-  if num
-    ans += dic[num] if dic[num]
+
+  if num >= 20 && num < 100
+    ans += doubles[numStr[0]]
+    ans += single[numStr[1]] if single[numStr[1]]
+  elsif num >= 10
+    ans += tens[num] if tens[num]
+  else
+    ans += single[num] if single[num]
   end
+
   ans += "Dollars"
 end
 
