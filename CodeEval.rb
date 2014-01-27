@@ -1270,13 +1270,22 @@ def textDollar(line)
   num = line.strip.to_i
   ans = ""
 
+  if num >= 100 && num < 1000 
+    ans += "#{single[num.to_s[0].to_i]}Hundred"
+    num -= (num.to_s[0] + "00").to_i
+  end
   if num >= 20 && num < 100
-    ans += doubles[numStr[0]]
-    ans += single[numStr[1]] if single[numStr[1]]
-  elsif num >= 10
+    ans += doubles[num.to_s[0].to_i]
+    #ans += single[numStr[1]] if single[numStr[1]]
+    num -= (num.to_s[0] + "0").to_i
+  end
+  if num >= 10 && num <= 19
     ans += tens[num] if tens[num]
-  else
+    num = 0
+  end
+  if num < 10
     ans += single[num] if single[num]
+    num = 0
   end
 
   ans += "Dollars"
