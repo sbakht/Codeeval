@@ -1260,6 +1260,10 @@ def stringRotation(line)
   return "False"
 end
 
+def textDollar(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts stringRotation(line)
+  puts textDollar(line)
 end
