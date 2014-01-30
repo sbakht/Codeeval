@@ -1340,6 +1340,16 @@ end
 
 def messageDecoding(line)
   line = line.strip
+  input = []
+  bits = []
+  line.length.times do |i|
+    if line[i] == "0" || line[i] == "1"
+      bits << line[i]
+    else
+      input << line[i]
+    end
+  end
+  bits
 end
 
 File.open(ARGV[0]).each_line do |line|
