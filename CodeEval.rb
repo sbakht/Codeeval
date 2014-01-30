@@ -1350,6 +1350,23 @@ def messageDecoding(line)
     end
   end
 
+  x = 0
+  keys = ["0"]
+  while x < input.length
+    puts keys[-1]
+    nextBit = (keys[-1].to_i(2) + 1).to_s(2)
+    if nextBit.length < keys[-1].length
+      nextBit = "0" * (keys[-1].length - nextBit.length) + nextBit
+    end
+
+    if nextBit.count("1") == nextBit.length
+      keys << "0" * (nextBit.length + 1)
+    else
+      keys << nextBit
+    end
+    x += 1
+  end
+
   startPos = 0
   while true
     size = bits[startPos..startPos+2].join('').to_i(2)
