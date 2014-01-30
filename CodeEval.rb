@@ -1338,6 +1338,10 @@ def textDollar(line)
   ans += "Dollars"
 end
 
+def messageDecoding(line)
+  line = line.strip
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts textDollar(line)
+  puts messageDecoding(line)
 end
