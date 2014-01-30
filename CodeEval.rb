@@ -1353,7 +1353,6 @@ def messageDecoding(line)
   x = 0
   keys = ["0"]
   while x < input.length
-    puts keys[-1]
     nextBit = (keys[-1].to_i(2) + 1).to_s(2)
     if nextBit.length < keys[-1].length
       nextBit = "0" * (keys[-1].length - nextBit.length) + nextBit
@@ -1367,6 +1366,7 @@ def messageDecoding(line)
     x += 1
   end
 
+  ans = ""
   startPos = 0
   while true
     size = bits[startPos..startPos+2].join('').to_i(2)
@@ -1374,13 +1374,17 @@ def messageDecoding(line)
     startPos += 3
 
     bits[startPos..-1].each_slice(size) do |*items|
-      #puts items.join('')
       startPos += size
-      break if items.join('') == segEnd
+      if items.join('') == segEnd
+        break
+      else
+        ans += input[keys.index(items.join(''))]
+      end
     end
 
     break if bits[startPos..startPos+2].join('').to_i(2) == 0
   end
+  ans
 end
 
 File.open(ARGV[0]).each_line do |line|
