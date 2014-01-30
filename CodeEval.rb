@@ -1357,7 +1357,7 @@ def messageDecoding(line)
     startPos += 3
 
     bits[startPos..-1].each_slice(size) do |*items|
-      puts items.join('')
+      #puts items.join('')
       startPos += size
       break if items.join('') == segEnd
     end
