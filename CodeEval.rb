@@ -1350,14 +1350,20 @@ def messageDecoding(line)
     end
   end
 
-  size = bits[0..2].join('').to_i(2)
-  segEnd = "1"*size
-  bits[3..-1].each_slice(size) do |*items|
-    puts items.join('')
-    break if items.join('') == segEnd
+  startPos = 0
+  while true
+    size = bits[startPos..startPos+2].join('').to_i(2)
+    segEnd = "1"*size
+    startPos += 3
 
+    bits[startPos..-1].each_slice(size) do |*items|
+      puts items.join('')
+      startPos += size
+      break if items.join('') == segEnd
+    end
+
+    break if bits[startPos..startPos+2].join('').to_i(2) == 0
   end
-  ""
 end
 
 File.open(ARGV[0]).each_line do |line|
