@@ -1428,6 +1428,11 @@ end
 def arrayAbsurdity(line)
   size, nums = line.strip.split(';')
   nums = nums.split(',')
+  sum1 = 0
+  sum2 = 0
+  (1..size.to_i-2).each { |i| sum1 += i }
+  nums.each { |i| sum2 += i.to_i }
+  return sum2 - sum1
 end
 
 File.open(ARGV[0]).each_line do |line|
