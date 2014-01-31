@@ -1409,7 +1409,11 @@ def reverseGroups(line)
   nums = nums.split(',')
   ans = []
   nums.each_slice(k.to_i) do |*x|
-    ans << x[0].reverse
+    if x[0].length == k.to_i
+      ans << x[0].reverse
+    else
+      ans << x[0]
+    end
   end
   ans.join(',')
 end
