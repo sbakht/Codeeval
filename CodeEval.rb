@@ -1435,6 +1435,23 @@ def arrayAbsurdity(line)
   return sum2 - sum1
 end
 
-File.open(ARGV[0]).each_line do |line|
-  puts arrayAbsurdity(line)
+
+def longestLines
+  numLines = File.open(ARGV[0], &:readline).to_i
+  maxLen = 0
+  lines = []
+  linesLen = []
+  File.open(ARGV[0]).each_line do |line|
+    line = line.strip
+    lines << line
+    linesLen << line.length
+  end
+  sortedLen = linesLen.sort.reverse
+  (0...numLines).each do |i|
+    puts lines[linesLen.index(sortedLen[i])]
+  end
 end
+
+File.open(ARGV[0]).each_line do |line|
+end
+longestLines
