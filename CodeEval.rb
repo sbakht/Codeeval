@@ -1407,6 +1407,11 @@ end
 def reverseGroups(line)
   nums,k = line.strip.split(';')
   nums = nums.split(',')
+  ans = []
+  nums.each_slice(k.to_i) do |*x|
+    ans << x[0].reverse
+  end
+  ans.join(',')
 end
 
 File.open(ARGV[0]).each_line do |line|
