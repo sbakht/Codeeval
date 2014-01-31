@@ -1387,6 +1387,10 @@ def messageDecoding(line)
   ans
 end
 
+def countingPrimes(line)
+  n1,n2 = line.strip.split(',')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts messageDecoding(line)
+  puts countingPrimes(line)
 end
