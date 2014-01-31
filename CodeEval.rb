@@ -1437,7 +1437,6 @@ end
 
 def longestLines
   numLines = File.open(ARGV[0], &:readline).to_i
-  maxLen = 0
   lines = []
   linesLen = []
   File.open(ARGV[0]).each_line do |line|
@@ -1451,8 +1450,91 @@ def longestLines
   end
 end
 
+class TreeNode
+  attr_accessor :value, :left, :right
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right  = nil
+  end
+end
+
+
+class BinaryTree
+  attr_accessor :root
+
+  def initialize
+
+  end
+
+  def add(value)
+    node = TreeNode.new(value)
+    if @root == nil
+      @root = node
+      return true
+    end
+
+    current = @root
+    while true
+      if value >= current.value 
+        if current.right == nil
+          current.right = node
+          break
+        end
+        current = current.right
+      else
+        if current.left == nil
+          current.left = node
+          break
+        end
+        current = current.left
+      end
+    end
+    current = node
+  end
+
+  def findPath(value)
+    return false if @root == nil
+    path = []
+    current = @root
+    while true
+      if value > current.value 
+        if current.right == nil
+          return false
+        end
+        path << current.value
+        current = current.right
+      elsif value < current.value
+        if current.left == nil
+          return false
+        end
+        path << current.value
+        current = current.left
+      else
+        path << current.value
+        return path
+      end
+    end
+  end
+end
+
 def lowestCommonAncestor(line)
   n1, n2 = line.strip.split
+  tree = BinaryTree.new
+  tree.add(30)
+  tree.add(8)
+  tree.add(52)
+  tree.add(3)
+  tree.add(20)
+  tree.add(10)
+  tree.add(29)
+
+  path1 = tree.findPath(n1.to_i)
+  path2 = tree.findPath(n2.to_i)
+  path1.reverse.each do |num|
+    return num if path2.index(num)
+  end
 end
 
 File.open(ARGV[0]).each_line do |line|
