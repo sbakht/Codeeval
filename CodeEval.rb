@@ -1435,7 +1435,6 @@ def arrayAbsurdity(line)
   return sum2 - sum1
 end
 
-
 def longestLines
   numLines = File.open(ARGV[0], &:readline).to_i
   maxLen = 0
@@ -1452,6 +1451,10 @@ def longestLines
   end
 end
 
-File.open(ARGV[0]).each_line do |line|
+def lowestCommonAncestor(line)
+  n1, n2 = line.strip.split
 end
-longestLines
+
+File.open(ARGV[0]).each_line do |line|
+  puts lowestCommonAncestor(line)
+end

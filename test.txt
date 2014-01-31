@@ -1,6 +1,2 @@
-2
-Hello World
-CodeEval
-Quick Fox
-A
-San Francisco
+8 52
+3 29
