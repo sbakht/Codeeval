@@ -1389,6 +1389,19 @@ end
 
 def countingPrimes(line)
   n1,n2 = line.strip.split(',')
+
+  count = 0
+  (n1.to_i..n2.to_i).each do |num|
+    isPrime = true
+    (2...num).each do |i|
+      if num % i == 0
+        isPrime = false
+        break
+      end
+    end
+    count += 1 if isPrime
+  end
+  count
 end
 
 File.open(ARGV[0]).each_line do |line|
