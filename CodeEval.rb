@@ -1425,6 +1425,11 @@ def firstNonRepeatedCharacter(line)
   end
 end
 
+def arrayAbsurdity(line)
+  size, nums = line.strip.split(';')
+  nums = nums.split(',')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts firstNonRepeatedCharacter(line)
+  puts arrayAbsurdity(line)
 end
