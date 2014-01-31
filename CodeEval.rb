@@ -1404,6 +1404,11 @@ def countingPrimes(line)
   count
 end
 
+def reverseGroups(line)
+  nums,k = line.strip.split(';')
+  nums = nums.split(',')
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts countingPrimes(line)
+  puts reverseGroups(line)
 end
