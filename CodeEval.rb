@@ -1418,6 +1418,13 @@ def reverseGroups(line)
   ans.join(',')
 end
 
+def firstNonRepeatedCharacter(line)
+  str = line.strip
+  str.length.times do |i|
+    return str[i] if str.count(str[i]) == 1
+  end
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts reverseGroups(line)
+  puts firstNonRepeatedCharacter(line)
 end
