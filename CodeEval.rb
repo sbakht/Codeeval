@@ -1562,11 +1562,11 @@ def typeAhead(line)
     numWords += 1
   end
   p wordsAfter
-  ans = ""
+  ans = []
   wordsAfter.each do |string,count|
-    ans << "#{string},#{(count/numWords.to_f).round(3)};"
+    ans << "#{string},#{(count/numWords.to_f).round(3)}"
   end
-  ans[0..-2]
+  ans.join(';')
 end
 
 File.open(ARGV[0]).each_line do |line|
