@@ -1550,17 +1550,23 @@ def typeAhead(line)
 
   str = str.split
   wordsAfter = {}
+  numWords = 0
   indexes =  str.each_index.select{|i| str[i] == word}
   indexes.each do |i|
     puts str[i..i+n]
-    if wordsAfter[str[i+n]]
-      wordsAfter[str[i+n]] += 1
+    if wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')]
+      wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')] += 1
     else
-      wordsAfter[str[i+n]] = 1
+      wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')] = 1
     end
+    numWords += 1
   end
   p wordsAfter
-
+  ans = ""
+  wordsAfter.each do |string,count|
+    ans << "#{string},#{(count/numWords.to_f).round(3)};"
+  end
+  ans[0..-2]
 end
 
 File.open(ARGV[0]).each_line do |line|
