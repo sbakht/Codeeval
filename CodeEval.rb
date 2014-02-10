@@ -1549,11 +1549,15 @@ def typeAhead(line)
   "Why does the lamb love Mary so?" the eager children cry; "Why, Mary loves the lamb, you know" the teacher did reply."'
 
   str = str.split
-  wordsAfter = []
+  wordsAfter = {}
   indexes =  str.each_index.select{|i| str[i] == word}
   indexes.each do |i|
     puts str[i..i+n]
-    wordsAfter << str[i+n]
+    if wordsAfter[str[i+n]]
+      wordsAfter[str[i+n]] += 1
+    else
+      wordsAfter[str[i+n]] = 1
+    end
   end
   p wordsAfter
 
