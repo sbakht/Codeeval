@@ -1553,7 +1553,6 @@ def typeAhead(line)
   numWords = 0
   indexes =  str.each_index.select{|i| str[i] == word}
   indexes.each do |i|
-    puts str[i..i+n]
     if wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')]
       wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')] += 1
     else
@@ -1561,10 +1560,11 @@ def typeAhead(line)
     end
     numWords += 1
   end
-  wordsAfter = wordsAfter.sort_by {|key, value| value}.reverse
+  wordsAfter = wordsAfter.sort_by {|key, value| [-Integer(value),key]}
   ans = []
   wordsAfter.each do |string,count|
-    ans << "#{string},#{(count/numWords.to_f).round(4)}"
+    percent = "%0.3f" % (count/numWords.to_f).round(3) #rounds and displays 3 decimals
+    ans << "#{string},#{percent}"
   end
   ans.join(';')
 end
