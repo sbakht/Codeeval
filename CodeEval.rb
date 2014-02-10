@@ -1561,7 +1561,7 @@ def typeAhead(line)
     end
     numWords += 1
   end
-  p wordsAfter
+  wordsAfter = wordsAfter.sort_by {|key, value| value}.reverse
   ans = []
   wordsAfter.each do |string,count|
     ans << "#{string},#{(count/numWords.to_f).round(3)}"
