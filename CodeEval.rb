@@ -1539,6 +1539,7 @@ end
 
 def typeAhead(line)
   n, word = line.strip.split(',')
+  word = word.split
   n = n.to_i - 1
   str = 'Mary had a little lamb its fleece was white as snow;
   And everywhere that Mary went, the lamb was sure to go.
@@ -1551,12 +1552,12 @@ def typeAhead(line)
   str = str.split
   wordsAfter = {}
   numWords = 0
-  indexes =  str.each_index.select{|i| str[i] == word}
+  indexes =  str.each_index.select{|i| str[i] == word[0]}
   indexes.each do |i|
-    if wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')]
-      wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')] += 1
+    if wordsAfter[str[i+n].gsub(/[^a-zA-Z\s]/, '')]
+      wordsAfter[str[i+n].gsub(/[^a-zA-Z\s]/, '')] += 1
     else
-      wordsAfter[str[i+n].gsub(/[^a-z\s]/, '')] = 1
+      wordsAfter[str[i+n].gsub(/[^a-zA-Z\s]/, '')] = 1
     end
     numWords += 1
   end
