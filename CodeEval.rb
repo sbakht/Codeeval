@@ -1582,7 +1582,12 @@ end
 
 def reverseAndAdd(line)
   line = line.strip
-
+  count = 0
+  while line != line.reverse
+    line = (line.to_i + line.reverse.to_i).to_s
+    count += 1
+  end
+  return count.to_s + " " + line
 end
 
 
