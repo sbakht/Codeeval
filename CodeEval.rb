@@ -1577,8 +1577,6 @@ def splitTheNumber(line)
     elsif chars.index('+')
         splitPoint = chars.index('+')
         return num[0...splitPoint].to_i + num[splitPoint..-1].to_i
-    else
-        return "NOO"
     end
 end
 
