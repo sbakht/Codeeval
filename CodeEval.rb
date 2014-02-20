@@ -1569,6 +1569,20 @@ def typeAhead(line)
   ans.join(';')
 end
 
+def splitTheNumber(line)
+    num, chars = line.strip.split
+    if chars.index('-')
+        splitPoint = chars.index('-')
+        return num[0...splitPoint].to_i - num[splitPoint..-1].to_i
+    elsif chars.index('+')
+        splitPoint = chars.index('+')
+        return num[0...splitPoint].to_i + num[splitPoint..-1].to_i
+    else
+        return "NOO"
+    end
+end
+
+
 File.open(ARGV[0]).each_line do |line|
   puts typeAhead(line)
 end
