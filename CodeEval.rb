@@ -1580,7 +1580,12 @@ def splitTheNumber(line)
     end
 end
 
+def reverseAndAdd(line)
+  line = line.strip
+
+end
+
 
 File.open(ARGV[0]).each_line do |line|
-  puts typeAhead(line)
+  puts reverseAndAdd(line)
 end
