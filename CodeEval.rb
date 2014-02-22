@@ -1591,6 +1591,25 @@ def reverseAndAdd(line)
 end
 
 
+def theMajorElement(line)
+  nums = line.strip.split(',')
+  hash = {}
+  i = 0
+  nums.each do |num|
+    if hash[num]
+      hash[num] += 1
+    else
+      hash[num] = 1
+    end
+    i += 1
+  end
+  halfLen = nums.length / 2
+  hash.each do |key, value|
+    return key if value > halfLen
+  end
+  "None"
+end
+
 File.open(ARGV[0]).each_line do |line|
-  puts reverseAndAdd(line)
+  puts theMajorElement(line)
 end
