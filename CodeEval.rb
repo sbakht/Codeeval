@@ -1610,23 +1610,25 @@ def theMajorElement(line)
   "None"
 end
 
-def racingCars
+def racingChars
   path = []
   File.open(ARGV[0]).each_line do |line|
     line = line.strip
     if(line.index("C"))
-      path << line.index("C")
+      path << [line.index("C"),line.index("_")]
     else
-      path << line.index("_")
+      path << [line.index("_"),line.index("_")]
     end
   end
 
   relative = 0
-  print "#"*path[0] + "|" + "#"*(11-path[0])
-  puts
+  str = "#"*12
+  str[path[0][0]] = "|"
+  puts str
 
   (1...path.length).each do |i|
-    relative = path[i] - path[i-1]
+    p = path[i][0]
+    relative = p - path[i-1][0]
     if(relative == 0)
       char =  "|"
     elsif(relative == -1)
@@ -1635,11 +1637,9 @@ def racingCars
       char =  "\\"
     end
 
-  print "#"*path[i] + char + "#"*(11-path[i])
-  puts
-
+    str = "#"*12
+    str[path[i][1]] = "_"
+    str[p] = char
+    puts str
   end
-
 end
-
-racingCars
