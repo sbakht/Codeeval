@@ -1610,10 +1610,30 @@ def theMajorElement(line)
   "None"
 end
 
-def racingCars(line)
-  
+def racingCars
+  path = []
+  File.open(ARGV[0]).each_line do |line|
+    line = line.strip
+    if(line.index("C"))
+      path << line.index("C")
+    else
+      path << line.index("_")
+    end
+  end
+
+  relative = 0
+  puts "|"
+  (1...path.length).each do |i|
+    relative = path[i] - path[i-1]
+    if(relative == 0)
+      puts "|"
+    elsif(relative == -1)
+      puts "/"
+    else
+      puts "\\"
+    end
+  end
+
 end
 
-File.open(ARGV[0]).each_line do |line|
-  puts theMajorElement(line)
-end
+racingCars
