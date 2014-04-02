@@ -1610,6 +1610,10 @@ def theMajorElement(line)
   "None"
 end
 
+def racingCars(line)
+  
+end
+
 File.open(ARGV[0]).each_line do |line|
   puts theMajorElement(line)
 end
