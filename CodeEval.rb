@@ -1622,16 +1622,22 @@ def racingCars
   end
 
   relative = 0
-  puts "|"
+  print "#"*path[0] + "|" + "#"*(11-path[0])
+  puts
+
   (1...path.length).each do |i|
     relative = path[i] - path[i-1]
     if(relative == 0)
-      puts "|"
+      char =  "|"
     elsif(relative == -1)
-      puts "/"
+      char =  "/"
     else
-      puts "\\"
+      char =  "\\"
     end
+
+  print "#"*path[i] + char + "#"*(11-path[i])
+  puts
+
   end
 
 end
