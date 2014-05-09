@@ -1643,3 +1643,56 @@ def racingChars
     puts str
   end
 end
+
+def workingExperience
+  months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
+  File.open(ARGV[0]).each_line do |line|
+    line = line.strip.split('; ')
+    dic = {}
+    line.each do |employed|
+      month =  employed[0..2]
+      year = employed[4..7].to_i
+      endMonth = employed[9..11]
+      endYear = employed[13..16].to_i
+
+      while(year != endYear || month != endMonth)
+        if(!dic.include?(year)) 
+          dic[year] = []
+        end
+
+        if(!dic[year].include?(month))
+          dic[year] << month
+        end
+
+        index = months.index(month)
+        if(index == 11)
+          index = 0
+          year = year + 1
+        else
+          index = index + 1
+        end
+        month = months[index]
+      end
+
+      if(!dic.include?(year)) 
+        dic[year] = [month]
+      end
+
+      if(!dic[year].include?(month))
+        dic[year] << month
+      end
+
+    end
+    
+    numMonths = 0
+    dic.each do |key,value|
+      numMonths += value.length
+    end
+
+    puts numMonths / 12
+  end
+
+end
+
+workingExperience
