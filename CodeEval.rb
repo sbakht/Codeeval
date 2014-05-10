@@ -1695,4 +1695,26 @@ def workingExperience
 
 end
 
-workingExperience
+def dataRecovery(line)
+  words, nums = line.strip.split(';')
+  words = words.split
+  nums = nums.split
+  sentence = []
+  nums.each_with_index do |num,i|
+    num = num.to_i
+    sentence[num-1] = words[i]
+  end
+
+  missingIndex = sentence.index(nil)
+  if(missingIndex)
+    sentence[missingIndex] = words[-1]
+  else
+    sentence << words[-1]
+  end
+
+  puts sentence.join(' ') 
+end
+
+File.open(ARGV[0]).each_line do |line|
+  dataRecovery(line)
+end
