@@ -1706,7 +1706,7 @@ def dataRecovery(line)
   end
 
   missingIndex = sentence.index(nil)
-  if(missingIndex)
+  if missingIndex
     sentence[missingIndex] = words[-1]
   else
     sentence << words[-1]
@@ -1715,6 +1715,47 @@ def dataRecovery(line)
   puts sentence.join(' ') 
 end
 
+def ministryOfTruth(line)
+  sentence, approved = line.split(';')
+  sentence = sentence.split
+  approved = approved.split
+
+  approved.each do |approvedWord|
+    sentence.each do |word|
+      if word.index(approvedWord)
+
+        if word.index(approvedWord) > 0
+          word[0...word.index(approvedWord)] = '_'*word.index(approvedWord)
+        end
+
+        word[word.index(approvedWord)+approvedWord.length..-1] = '_'*(word.length - (word.index(approvedWord)+approvedWord.length))
+
+      end
+    end
+  end
+
+  sentence.each_with_index do |word,i|
+    if !word.index('_') && !approved.index(word)
+      sentence[i] = '_'*sentence[i].length  
+    end
+  end
+
+  sentence = sentence.join(' ')
+  ans = sentence.gsub(/[_]+/,'')
+
+  ans = ans.strip
+  ans.gsub!(/\s{2,}/,' ') #Replace multiple whitespace with single
+
+  # puts ans
+  # puts approved.join(' ')
+  if ans == approved.join(' ')
+    puts sentence
+  else
+    puts "I cannot fix history"
+  end
+  # puts '--------------------'
+end
+
 File.open(ARGV[0]).each_line do |line|
-  dataRecovery(line)
+  ministryOfTruth(line)
 end
