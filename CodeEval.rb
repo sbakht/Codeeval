@@ -1756,6 +1756,29 @@ def ministryOfTruth(line)
   # puts '--------------------'
 end
 
+def ageDistribution(num)
+  num = num.strip.to_i
+  if num < 0 || num > 100
+    puts "This program is for humans"
+  elsif num <= 2
+    puts "Still in Mama's arms"
+  elsif num <= 4
+    puts "Preschool Maniac"
+  elsif num <= 11
+    puts "Elementary school"
+  elsif num <= 14
+    puts "Middle school"
+  elsif num <= 18
+    puts "High school"
+  elsif num <= 22
+    puts "College"
+  elsif num <= 65
+    puts "Working for the man"
+  elsif num <= 100
+    puts "The Golden Years"
+  end
+end
+
 File.open(ARGV[0]).each_line do |line|
-  ministryOfTruth(line)
+  ageDistribution(line)
 end
