@@ -1779,6 +1779,18 @@ def ageDistribution(num)
   end
 end
 
+def lettercasePercentRatio(line)
+  line = line.strip
+  numLowerCase = 0.0
+  numUpperCase = 0.0
+  line.length.times do |i|
+    line[i] == line[i].downcase ? numLowerCase += 1 : numUpperCase += 1
+  end
+  percentLower = (numLowerCase / line.length * 100)
+  percentUpper = (numUpperCase / line.length * 100)
+  puts "lowercase: " + sprintf('%.2f', percentLower) + " uppercase: " + sprintf('%.2f', percentUpper)
+end
+
 File.open(ARGV[0]).each_line do |line|
-  ageDistribution(line)
+  lettercasePercentRatio(line)
 end
