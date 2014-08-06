@@ -1803,9 +1803,33 @@ def jugglingWithZeros(line)
     end
   end
   puts binary.to_i(2) #converts to int
+end
 
+def batsChallenge(line)
+  line = line.strip.split
+  wireLength = line[0].to_i
+  distance = line[1].to_i
+  bats = line[3..-1]
+  numNewBats = 0
+  if bats.length > 1
+    bats.length.times do |i|
+      if i == 0
+        numNewBats += (bats[0].to_i - 6) / distance
+      elsif i == bats.length - 1
+        numNewBats += (wireLength - 6 - bats[i].to_i) / distance
+      else
+        numNewBats += (bats[i+1].to_i - bats[i].to_i) / distance - 1
+      end
+    end
+  elsif bats.length == 1
+    numNewBats += (bats[0].to_i - 6) / distance
+    numNewBats += (wireLength - 6 - bats[0].to_i) / distance
+  else
+    numNewBats = (wireLength - 12) / distance + 1
+  end
+  puts numNewBats
 end
 
 File.open(ARGV[0]).each_line do |line|
-  jugglingWithZeros(line)
+  batsChallenge(line)
 end
