@@ -1791,6 +1791,21 @@ def lettercasePercentRatio(line)
   puts "lowercase: " + sprintf('%.2f', percentLower) + " uppercase: " + sprintf('%.2f', percentUpper)
 end
 
+def jugglingWithZeros(line)
+  line = line.strip.split(' ')
+  binary = ""
+  flag = ""
+  line.each_with_index do |item, i|
+    if i % 2 == 0
+      item == "0" ? flag = "0" : flag = "1"
+    else
+      binary += flag * item.length
+    end
+  end
+  puts binary.to_i(2) #converts to int
+
+end
+
 File.open(ARGV[0]).each_line do |line|
-  lettercasePercentRatio(line)
+  jugglingWithZeros(line)
 end
