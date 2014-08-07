@@ -1830,6 +1830,45 @@ def batsChallenge(line)
   puts numNewBats
 end
 
+def locks(line)
+  line = line.strip.split(' ')
+  passNum = 1
+  n = line[0].to_i
+  m = line[1].to_i
+  locks = Array.new(n,0)
+  while passNum <= m
+    if passNum % 2 != 0
+      if passNum == m
+        locks.length % 2 == 0 ? i = locks.length - 1 : i = locks.length - 2
+        locks[i] == 1 ? locks[i] = 0 : locks[i] = 1
+      else
+        i = 1
+        while i < locks.length
+          locks[i] = 1
+          i += 2
+        end
+      end
+    else
+      if passNum == m
+        i = locks.length - 1 if locks.length % 3 == 0
+        i = locks.length - 2 if locks.length % 3 == 1
+        i = locks.length - 3 if locks.length % 3 == 2
+        locks[i] == 1 ? locks[i] = 0 : locks[i] = 1
+      else
+        i = 2
+        while i < locks.length
+          locks[i] == 1 ? locks[i] = 0 : locks[i] = 1
+          i += 3
+        end    
+      end
+    end
+    # print locks
+    puts ""
+    passNum += 1
+  end
+  puts locks.count(0)
+end
+
 File.open(ARGV[0]).each_line do |line|
-  batsChallenge(line)
+  locks(line)
 end
