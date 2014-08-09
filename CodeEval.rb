@@ -1869,6 +1869,21 @@ def locks(line)
   puts locks.count(0)
 end
 
+def rollercoaster(line)
+  line = line.strip
+  upper = false
+  line.length.times do |i|
+    if !upper
+      line[i] = line[i].upcase
+      upper = true if line[i].downcase != line[i].upcase
+    else
+      line[i] = line[i].downcase
+      upper = false if line[i].downcase != line[i].upcase
+    end
+  end
+  puts line
+end
+
 File.open(ARGV[0]).each_line do |line|
-  locks(line)
+  rollercoaster(line)
 end
