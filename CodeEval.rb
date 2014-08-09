@@ -632,7 +632,6 @@ def simpleCalculator(line)
 
     if x == 0
       ans = exponentString(innerParenStr)
-      x = 0 if ans
     elsif x == 1 || x == 2
       #the ORS for innerParenStr.length take care of when the index value is nil
       if (innerParenStr.index('*') || innerParenStr.length) < (innerParenStr.index('/') || innerParenStr.length)
@@ -640,14 +639,12 @@ def simpleCalculator(line)
       else
         ans = divideString(innerParenStr)
       end
-      x = 0 if ans
     elsif x == 3 || x == 4
       if (innerParenStr.index('+') || innerParenStr.length) < (innerParenStr.index('- ') || innerParenStr.length)
         ans = addString(innerParenStr)
       else
         ans = subtractString(innerParenStr)
       end
-      x = 0 if ans
     end
 
     if ans #not nil
