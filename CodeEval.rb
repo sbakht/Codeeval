@@ -599,22 +599,27 @@ def simpleCalculator(line)
   while true
     x = 0 if x >= 7
 
-    openParen = -1
-    closedParen = -1
-    (0...line.length).each do |i| #gets the inner most parenthesis
-      if line[i] == '('
-        openParen = i
-      elsif line[i] == ')'
-        closedParen = i
-        break
-      end
-    end
+    # openParen = -1
+    # closedParen = -1
+    # (0...line.length).each do |i| #gets the inner most parenthesis
+    #   if line[i] == '('
+    #     openParen = i
+    #   elsif line[i] == ')'
+    #     closedParen = i
+    #     break
+    #   end
+    # end
+
+    closedParen = line.index(')')
+    closedParen = -1 if !closedParen
+    openParen = line[0..closedParen].rindex('(')
+    openParen = -1 if !openParen
 
     innerParenStr = line[openParen..closedParen]
 
 
     if x == 0
-      ans = calculateOperation(innerParenStr,"!")
+      # ans = calculateOperation(innerParenStr,"!")
       ans = calculateOperation(innerParenStr,"^")
     elsif x == 1
       ans = calculateOperation(innerParenStr,"mod")
