@@ -562,10 +562,12 @@ def simpleCalculator(line)
   line = '(' + line + ')'
 
   def calculateOperation(str, operation)
-    match = str.match(/[-]*\d+[\.]*\d*\s*#{Regexp.escape(operation)}\s*[-]*\d+[\.]*\d*/)
+    match = str.match(/[-]*\d+[\.]*\d*\s*#{Regexp.escape(operation)}\s*[-]*\d*[\.]*\d*/)
     left,right = match.to_s.split(operation)
     return nil if left == nil && right == nil
     case operation
+    when "!"
+      solution = ((1..5).inject(:*) || 1).to_s
     when "^"
       solution = (left.to_f ** right.to_f).to_s
     when "mod"
@@ -612,6 +614,7 @@ def simpleCalculator(line)
 
 
     if x == 0
+      ans = calculateOperation(innerParenStr,"!")
       ans = calculateOperation(innerParenStr,"^")
     elsif x == 1
       ans = calculateOperation(innerParenStr,"mod")
