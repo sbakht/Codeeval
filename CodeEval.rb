@@ -568,6 +568,8 @@ def simpleCalculator(line)
     case operation
     when "^"
       solution = (left.to_f ** right.to_f).to_s
+    when "mod"
+      solution = (left.to_f % right.to_f).to_s
     when "*"
       solution = (left.to_f * right.to_f).to_s    
     when "/"
@@ -593,7 +595,7 @@ def simpleCalculator(line)
 
   x = 0
   while true
-    x = 0 if x >= 6
+    x = 0 if x >= 7
 
     openParen = -1
     closedParen = -1
@@ -611,14 +613,16 @@ def simpleCalculator(line)
 
     if x == 0
       ans = calculateOperation(innerParenStr,"^")
-    elsif x == 1 || x == 2
+    elsif x == 1
+      ans = calculateOperation(innerParenStr,"mod")
+    elsif x == 2 || x == 3
       #the ORS for innerParenStr.length take care of when the index value is nil
       if (innerParenStr.index('*') || innerParenStr.length) < (innerParenStr.index('/') || innerParenStr.length)
         ans = calculateOperation(innerParenStr,"*")
       else
         ans = calculateOperation(innerParenStr,"/")
       end
-    elsif x == 3 || x == 4
+    elsif x == 4 || x == 5
       if (innerParenStr.index('+') || innerParenStr.length) < (innerParenStr.index('- ') || innerParenStr.length)
         ans = calculateOperation(innerParenStr,"+")
       else
@@ -631,7 +635,7 @@ def simpleCalculator(line)
       x = 0 #reset if found valid
     end
 
-    if x == 5
+    if x == 6
       if openParen == -1
         break
       else
