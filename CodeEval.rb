@@ -561,43 +561,22 @@ def simpleCalculator(line)
   line = line.strip
   line = '(' + line + ')'
 
-  def exponentString(str)
-    match = str.match(/[-]*\d+[\.]*\d*\s*\^\s*[-]*\d+[\.]*\d*/)
-    left,right = match.to_s.split("^")
+  def calculateOperation(str, operation)
+    match = str.match(/[-]*\d+[\.]*\d*\s*#{Regexp.escape(operation)}\s*[-]*\d+[\.]*\d*/)
+    left,right = match.to_s.split(operation)
     return nil if left == nil && right == nil
-    solution = (left.to_f ** right.to_f).to_s
-    str.gsub!(match.to_s,solution)
-  end
-
-  def multiplyString(str)
-    match = str.match(/[-]*\d+[\.]*\d*\s*\*\s*[-]*\d+[\.]*\d*/)
-    left,right = match.to_s.split("*")
-    return nil if left == nil && right == nil
-    solution = (left.to_f * right.to_f).to_s
-    str.gsub!(match.to_s,solution)
-  end
-
-  def divideString(str)
-    match = str.match(/[-]*\d+[\.]*\d*\s*\/\s*[-]*\d+[\.]*\d*/)
-    left,right = match.to_s.split("/")
-    return nil if left == nil && right == nil
-    solution = (left.to_f / right.to_f).to_s
-    str.gsub!(match.to_s,solution)
-  end
-
-  def addString(str)
-    match = str.match(/[-]*\d+[\.]*\d*\s*\+\s*[-]*\d+[\.]*\d*/)
-    left,right = match.to_s.split("+")
-    return nil if left == nil && right == nil
-    solution = (left.to_f + right.to_f).to_s
-    str.gsub!(match.to_s,solution)
-  end
-
-  def subtractString(str)
-    match = str.match(/[-]*\d+[\.]*\d*\s*\-\s*[-]*\d+[\.]*\d*/)
-    left,right = match.to_s.split("- ")
-    return nil if left == nil && right == nil
-    solution = (left.to_f - right.to_f).to_s
+    case operation
+    when "^"
+      solution = (left.to_f ** right.to_f).to_s
+    when "*"
+      solution = (left.to_f * right.to_f).to_s    
+    when "/"
+      solution = (left.to_f / right.to_f).to_s   
+    when "+"
+      solution = (left.to_f + right.to_f).to_s
+    when "- "
+      solution = (left.to_f - right.to_f).to_s
+    end
     str.gsub!(match.to_s,solution)
   end
 
@@ -631,19 +610,19 @@ def simpleCalculator(line)
 
 
     if x == 0
-      ans = exponentString(innerParenStr)
+      ans = calculateOperation(innerParenStr,"^")
     elsif x == 1 || x == 2
       #the ORS for innerParenStr.length take care of when the index value is nil
       if (innerParenStr.index('*') || innerParenStr.length) < (innerParenStr.index('/') || innerParenStr.length)
-        ans = multiplyString(innerParenStr)
+        ans = calculateOperation(innerParenStr,"*")
       else
-        ans = divideString(innerParenStr)
+        ans = calculateOperation(innerParenStr,"/")
       end
     elsif x == 3 || x == 4
       if (innerParenStr.index('+') || innerParenStr.length) < (innerParenStr.index('- ') || innerParenStr.length)
-        ans = addString(innerParenStr)
+        ans = calculateOperation(innerParenStr,"+")
       else
-        ans = subtractString(innerParenStr)
+        ans = calculateOperation(innerParenStr,"- ")
       end
     end
 
@@ -667,7 +646,7 @@ def simpleCalculator(line)
     to_i == self ? to_i : self.round(5)
   end
 
-  return line.to_f.prettify
+  puts line.to_f.prettify
 end
 
 def validParentheses(line)
@@ -1882,5 +1861,5 @@ def rollercoaster(line)
 end
 
 File.open(ARGV[0]).each_line do |line|
-  rollercoaster(line)
+  simpleCalculator(line)
 end
