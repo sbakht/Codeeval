@@ -1895,6 +1895,19 @@ def wordChain(line)
   print words
 end
 
+def readMore(line)
+  if line.length <= 55
+    puts line
+  else
+    lastSpace = line[0...40].rindex(' ')
+    if lastSpace
+      puts line[0...lastSpace + 1].strip + '... <Read More>'
+    else
+      puts line[0...40] 
+    end
+  end
+end
+
 File.open(ARGV[0]).each_line do |line|
-  wordChain(line)
+  readMore(line)
 end
