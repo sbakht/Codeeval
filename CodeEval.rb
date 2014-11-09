@@ -1872,6 +1872,29 @@ def rollercoaster(line)
   puts line
 end
 
+def wordChain(line)
+  words = line.strip.split(',')
+  i = 0
+  while i < words.length
+    startChar = words[i][0]
+    endChar = words[i][-1]
+    x = 0
+    found = false
+    while x < words.length
+      if words[x][-1] == startChar || words[x][0] == endChar
+        found = true
+      end
+      x += 1
+    end
+    if !found
+      words.delete_at(i)
+    else
+      i += 1
+    end
+  end
+  print words
+end
+
 File.open(ARGV[0]).each_line do |line|
-  simpleCalculator(line)
+  wordChain(line)
 end
